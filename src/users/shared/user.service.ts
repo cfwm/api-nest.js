@@ -1,41 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { User } from './user';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class UserService {
-  users: User[] = [
-    { id: 0, nome: 'Carlos Moreira', idade: 30 },
-    { id: 1, nome: 'Francisco Werner', idade: 30 },
-  ];
+  constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
 
-  getAll() {
-    return this.users;
+  async getAll() {
+    return await this.userModel.find().exec();
   }
 
-  getById(id: number) {
-    return this.users.find((user) => user.id == id);
+  async getById(id: string) {
+    return await this.userModel.findById(id).exec();
   }
 
-  create(user: User) {
-    let lastId = 0;
-    if (this.users.length > 0) {
-      lastId = this.users[this.users.length - 1].id;
-    }
-    user.id = lastId + 1;
-    this.users.push(user);
-    return user;
+  async create(user: User) {
+    const createdUser = new this.userModel(user);
+    return await createdUser.save();
   }
 
-  update(user: User) {
-    const currentUser = this.getById(user.id);
-    if (currentUser) {
-      currentUser.nome = user.nome;
-      currentUser.idade = user.idade;
-    }
-    return currentUser;
+  async update(id: string, user: User) {
+    await this.userModel.updateOne({ _id: id }, user).exec();
+    return this.getById(id);
   }
 
-  delete(id: number) {
-    this.users = this.users.filter((user) => user.id != id);
+  async delete(id: string) {
+    await this.userModel.deleteOne({ _id: id }).exec();
   }
 }

@@ -1,5 +1,6 @@
-export class User {
-  id: number;
+import { Document } from 'mongoose';
+
+export class User extends Document {
   nome: string;
   idade: number;
 }
