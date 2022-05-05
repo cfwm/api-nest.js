@@ -9,6 +9,11 @@ export class UserService {
 
   async getAll() {
     return await this.userModel.find().exec();
+    // console.log(2)
+    // const ret = await this.userModel.find().exec();
+    // console.log('ret',ret)
+    // return ret
+    // return await this.userModel.find().exec();
   }
 
   async getById(id: string) {
