@@ -14,4 +14,15 @@ export class User extends Document {
     complement: string;
     ibge: string;
   };
+  github: {
+    login: string;
+    id: number;
+    score: number;
+    url: string;
+    html_url: string;
+    avatar_url: string;
+    repos_url: string;
+    repos_amount: number;
+    repositories: [];
+  };
 }

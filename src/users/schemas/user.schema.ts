@@ -14,4 +14,15 @@ export const UserSchema = new mongoose.Schema({
     complement: String,
     ibge: String,
   },
+  github: {
+    login: String,
+    id: Number,
+    score: Number,
+    url: String,
+    html_url: String,
+    avatar_url: String,
+    repos_url: String,
+    repos_amount: Number,
+    repositories: Array,
+  },
 });
