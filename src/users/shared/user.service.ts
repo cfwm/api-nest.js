@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from './user';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { encrypt } from '../../utils/utils';
 
 @Injectable()
 export class UserService {
@@ -16,11 +17,13 @@ export class UserService {
   }
 
   async create(user: User) {
+    user.email = await encrypt(user.email);
     const createdUser = new this.userModel(user);
     return await createdUser.save();
   }
 
   async update(id: string, user: User) {
+    user.email = await encrypt(user.email);
     await this.userModel.updateOne({ _id: id }, user).exec();
     return this.getById(id);
   }

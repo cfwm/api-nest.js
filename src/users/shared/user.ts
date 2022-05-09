@@ -145,6 +145,12 @@ export class User extends Document {
   surname: string;
 
   @ApiProperty({
+    example: 'User E-mail',
+    description: 'The e-mail of the user',
+  })
+  email: string;
+
+  @ApiProperty({
     example: 30,
     description: 'The age of the user',
   })
