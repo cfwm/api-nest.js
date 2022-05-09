@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { User } from './shared/user';
 import { UserService } from './shared/user.service';
-import * as httpStatus from 'http-status-codes';
 
 @Controller('users')
 export class UsersController {
@@ -17,14 +16,7 @@ export class UsersController {
 
   @Get()
   async getAll() {
-    try {
-      return await this.userService.getAll();
-    } catch (error) {
-      return {
-        data: { error },
-        status: httpStatus.StatusCodes.INTERNAL_SERVER_ERROR,
-      };
-    }
+    return await this.userService.getAll();
   }
 
   @Get(':id')
