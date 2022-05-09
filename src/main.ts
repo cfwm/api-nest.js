@@ -10,8 +10,8 @@ async function bootstrap() {
     .setDescription(
       'API documentation developed for Roit Bank Full Stack Engineer position challenge.',
     )
+    .setContact('Carlos Moreira', '', 'carlosfwm@gmail.com')
     .setVersion('v1')
-    .addTag('users')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
