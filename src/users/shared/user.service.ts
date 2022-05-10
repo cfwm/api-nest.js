@@ -5,7 +5,7 @@ import { Model } from 'mongoose';
 import { encrypt } from '../../utils/utils';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
 
   async getAll() {
@@ -30,5 +30,9 @@ export class UserService {
 
   async delete(id: string) {
     await this.userModel.deleteOne({ _id: id }).exec();
+  }
+
+  async findOne(name: string) {
+    await this.userModel.findOne({ name: name }).exec();
   }
 }

@@ -5,3 +5,7 @@ export async function encrypt(data: string) {
   const salt = await bcrypt.genSalt();
   return await bcrypt.hash(data, salt);
 }
+
+export async function compare(email: string, hash: string) {
+  return await bcrypt.compare(email, hash);
+}
